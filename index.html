@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RadioSurf</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="radio-player">
+        <div class="station-icon-container">
+            <img id="stationIcon" src="" alt="Station Icon" style="display:none;">
+            <svg id="defaultStationIcon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6.51,3.31A10.43,10.43,0,0,0,3.31,6.51a.75.75,0,0,0,0,1.08L5.22,9.5a.75.75,0,0,0,1.08,0l1.9-1.91a.76.76,0,0,0,0-1.08L6.51,3.31ZM12,6a6,6,0,1,0,6,6A6,6,0,0,0,12,6Zm0,10.5A4.5,4.5,0,1,1,16.5,12,4.51,4.51,0,0,1,12,16.5ZM20.69,6.51A10.43,10.43,0,0,0,17.49,3.31L15.6,5.22a.76.76,0,0,0,0,1.08l1.91,1.9a.75.75,0,0,0,1.08,0l1.9-1.91A.75.75,0,0,0,20.69,6.51ZM3.31,17.49a10.43,10.43,0,0,0,3.2,3.2l1.91-1.9a.75.75,0,0,0,0-1.08L6.51,15.6a.76.76,0,0,0-1.08,0l-1.9,1.91A.75.75,0,0,0,3.31,17.49ZM15.6,18.78l1.9,1.91a10.43,10.43,0,0,0,3.2-3.2.75.75,0,0,0,0-1.08L18.78,14.5a.75.75,0,0,0-1.08,0l-1.91,1.91A.76.76,0,0,0,15.6,18.78Z M4,12a.75.75,0,0,0-.75-.75A10.46,10.46,0,0,0,2.1,15H2a.75.75,0,0,0,0,1.5h.1A10.46,10.46,0,0,0,3.25,20a.75.75,0,0,0,.68-.52.74.74,0,0,0-.18-.73A8.94,8.94,0,0,1,4,12Z M20,12a8.94,8.94,0,0,1-.25,2.25.74.74,0,0,0-.18-.73.75.75,0,0,0,.68.52A10.46,10.46,0,0,0,21.9,16.5H22a.75.75,0,0,0,0-1.5h-.1A10.46,10.46,0,0,0,20.75,11.25.75.75,0,0,0,20,12Z"/>
+            </svg>
+        </div>
+        <div class="station-info">
+            <h2 id="stationName">RadioSurf <a id="stationHomepageLink" href="#" target="_blank" title="Visit station homepage" style="display:none;">🔗</a></h2>
+            <p id="stationCountry">Ready to explore?</p>
+        </div>
+        <div id="status">Press Play or search.</div>
+        <div class="controls">
+            <button id="prevBtn" class="btn-secondary">«</button>
+            <button id="playPauseBtn" class="btn-primary">▶</button>
+            <button id="nextBtn" class="btn-secondary">»</button>
+        </div>
+        <div class="settings-panel">
+            <div id="currentSearchMode">Surfing: Random</div>
+            <div class="search-controls-container">
+                <select id="searchTypeSelect">
+                    <option value="tag" selected>Genre</option>
+                    <option value="country">Country</option>
+                    <option value="language">Language</option>
+                    <option value="name">Name</option>
+                </select>
+                <div class="input-with-suggestions">
+                    <input type="text" id="searchInput" placeholder="e.g., rock" autocomplete="off">
+                    <div id="suggestionsContainer" class="suggestions-container"></div>
+                </div>
+                <button id="searchBtn">Search</button>
+                <button id="randomBtn">Random</button>
+            </div>
+            <div id="sleep-timer-panel">
+                <span id="sleepTimerStatus"></span>
+                <div id="sleepTimerControls">
+                    <button class="timer-btn" data-minutes="15">15m</button>
+                    <button class="timer-btn" data-minutes="30">30m</button>
+                    <button class="timer-btn" data-minutes="60">60m</button>
+                    <button class="timer-btn" id="cancelTimerBtn">Cancel</button>
+                </div>
+            </div>
+            <div class="mode-toggle">
+                <input type="checkbox" id="modeSwitch">
+                <label for="modeSwitch" id="modeLabel">Data Saver Mode</label>
+            </div>
+            <div class="theme-toggle mode-toggle">
+                <input type="checkbox" id="themeSwitch">
+                <label for="themeSwitch" id="themeLabel">☀️ Light Mode</label>
+            </div>
+        </div>
+    </div>
+    <div id="player-container" style="display: none;">
+        <audio class="audio-pool-player" preload="none" crossorigin="anonymous" muted></audio>
+        <audio class="audio-pool-player" preload="none" crossorigin="anonymous" muted></audio>
+        <audio class="audio-pool-player" preload="none" crossorigin="anonymous" muted></audio>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
