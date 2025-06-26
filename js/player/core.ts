@@ -21,7 +21,7 @@ import {
 } from '../state.js';
 import { initializeApiServer } from '../api/discovery.js';
 import { fetchStations } from '../api/requests.js';
-import { updateUI } from '../ui/display.js'; // Will be .ts soon
+import { updateUI } from '../ui/display.js';
 import { resetPlayer, preloadNextStations } from './pool.js';
 
 export function playPauseToggle(): void {
@@ -90,6 +90,28 @@ function playCurrentStation(): void {
     if (!newActivePlayer) return; // Safety check
 
     updateUI(currentStation);
+
+    // --- NEW: MEDIA SESSION API INTEGRATION ---
+    if ('mediaSession' in navigator) {
+        navigator.mediaSession.metadata = new MediaMetadata({
+            title: currentStation.name,
+            artist: currentStation.country || 'RadioSurf',
+            album: 'RadioSurf',
+            artwork: [
+                // Provide multiple sizes, browser will pick the best one.
+                // It cleverly uses the station's favicon but falls back to your PWA icons.
+                { src: currentStation.favicon || 'icons/icon-192.png', sizes: '192x192', type: 'image/png' },
+                { src: currentStation.favicon || 'icons/icon-512.png', sizes: '512x512', type: 'image/png' },
+            ]
+        });
+
+        navigator.mediaSession.setActionHandler('play', playPauseToggle);
+        navigator.mediaSession.setActionHandler('pause', playPauseToggle);
+        navigator.mediaSession.setActionHandler('previoustrack', playPrevious);
+        navigator.mediaSession.setActionHandler('nexttrack', playNext);
+    }
+    // --- END OF MEDIA SESSION CODE ---
+
     if (newActivePlayer.src !== currentStation.url_resolved) {
         newActivePlayer.src = currentStation.url_resolved;
     }
