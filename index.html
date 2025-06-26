@@ -4,7 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RadioSurf</title>
-    <link rel="icon" href="data:,">
+
+    <!-- PWA Meta Tags -->
+    <link rel="manifest" href="manifest.webmanifest">
+    <meta name="theme-color" content="#2c2c2e">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+
+    <link rel="icon" href="data:,"> <!-- Kept your original blank favicon -->
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -67,5 +73,20 @@
     </div>
 
   <script type="module" src="dist/js/main.js"></script>
+  
+  <!-- PWA Service Worker Registration -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then(registration => {
+            console.log('Service Worker registered: ', registration);
+          })
+          .catch(registrationError => {
+            console.log('Service Worker registration failed: ', registrationError);
+          });
+      });
+    }
+  </script>
 </body>
 </html>
