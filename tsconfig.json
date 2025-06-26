@@ -1,0 +1,25 @@
+// tsconfig.json
+{
+  "compilerOptions": {
+    "target": "ES2020", // Modern target, includes features like padStart, good for Promise etc.
+    "module": "ESNext",
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "allowJs": true, // Keep this true for now as we migrate file by file
+    "checkJs": false, // We'll rely on TS for .ts files
+    "outDir": "./dist/js", // Output JS will go here
+    "rootDir": "./js", // Source TS/JS files are here
+    "moduleResolution": "node", // Or "bundler" for newer setups
+    "sourceMap": true,
+    "noImplicitAny": true, // Redundant with strict:true but good to be explicit
+    "strictNullChecks": true // Redundant with strict:true
+  },
+  "include": [
+    "js/**/*.ts", // Only compile .ts files initially, then add .js if needed
+    "js/**/*.js"  // Keep this if you want to incrementally convert and still type-check JS
+  ],
+  "exclude": ["node_modules", "dist"]
+}
